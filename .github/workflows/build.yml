@@ -1,4 +1,4 @@
-name: Build and test vda5050_interfaces
+name: "Build and test vda5050_interfaces"
 
 on:
   workflow_dispatch:
@@ -9,7 +9,6 @@ on:
 
 jobs:
   industrial_ci:
-    name: Build and test
     strategy:
       matrix:
         env:
@@ -17,13 +16,21 @@ jobs:
             ROS_DISTRO: jazzy
           - ICI_JOB_NAME: clang
             ROS_DISTRO: jazzy
-            ADDITIONAL_DEBS: clang lld
+            ADDITIONAL_DEBS: "clang lld"
             CC: "clang"
             CXX: "clang++"
+    env:
+      ISOLATION: "shell"
+      CCACHE_DIR: /github/home/.ccache
     runs-on: ubuntu-latest
     container:
       image: ros:jazzy-ros-core
     steps:
       - uses: actions/checkout@v4
+      # step up caching
+      - uses: actions/cache@v4
+        with:
+          path: ${{ env.CCACHE_DIR }}
+          key: ccache-${{ matrix.env.ROS_DISTRO }}-${{ matrix.env.ICI_JOB_NAME }}
       - uses: 'ros-industrial/industrial_ci@master'
-        env: {{ matrix.env }}
+        env: ${{ matrix.env }}
