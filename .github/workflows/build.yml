@@ -1,4 +1,4 @@
-name: Build and test vda5050_interfaces
+name: "Build and test vda5050_interfaces"
 
 on:
   workflow_dispatch:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   industrial_ci:
-    name: Build and test
+    name: "Build and test"
     strategy:
       matrix:
         env:
@@ -17,7 +17,7 @@ jobs:
             ROS_DISTRO: jazzy
           - ICI_JOB_NAME: clang
             ROS_DISTRO: jazzy
-            ADDITIONAL_DEBS: clang lld
+            ADDITIONAL_DEBS: "clang lld"
             CC: "clang"
             CXX: "clang++"
     runs-on: ubuntu-latest
