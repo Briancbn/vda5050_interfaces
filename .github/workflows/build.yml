@@ -33,4 +33,4 @@ jobs:
           path: ${{ env.CCACHE_DIR }}
           key: ccache-${{ matrix.env.ROS_DISTRO }}-${{ matrix.env.ICI_JOB_NAME }}
       - uses: 'ros-industrial/industrial_ci@master'
-        env: {{ matrix.env }}
+        env: ${{ matrix.env }}
