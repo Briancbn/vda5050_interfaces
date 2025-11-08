@@ -82,29 +82,8 @@ ament_export_dependencies(
 )
 
 if(BUILD_TESTING)
-  find_package(ament_cmake_cppcheck REQUIRED)
-  ament_cppcheck()
-
-  find_package(ament_cmake_cpplint REQUIRED)
-  set(cpplint_filters
-    "-whitespace/newline"
-  )
-  set(cpplint_root_paths
-    "${CMAKE_CURRENT_SOURCE_DIR}/include/"
-  )
-
-  ament_cpplint(
-    FILTERS "${cpplint_filters}"
-    ROOT "${cpplint_root_paths}"
-  )
-
-  find_package(ament_cmake_clang_format REQUIRED)
-  ament_clang_format(
-    CONFIG_FILE "${CMAKE_CURRENT_SOURCE_DIR}/.clang-format"
-  )
-
-  find_package(ament_cmake_copyright REQUIRED)
-  ament_copyright()
+  find_package(rmf2_lint REQUIRED)
+  rmf2_lint()
 
   find_package(ament_cmake_gtest REQUIRED)
 
